@@ -43,7 +43,7 @@ variable "max_instance_count" {
 
 variable "available_memory" {
   description = "(Optional) The amount of memory in MB available for a function. Defaults to 256MB."
-  type        = number
+  type        = string
   default     = "512M"
 }
 
