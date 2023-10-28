@@ -41,6 +41,12 @@ variable "max_instance_count" {
   default     = 100
 }
 
+variable "available_memory" {
+  description = "(Optional) The amount of memory in MB available for a function. Defaults to 256MB."
+  type        = number
+  default     = "512M"
+}
+
 variable "timeout_seconds" {
   description = "(Optional) The function execution timeout. Execution is considered failed and can be terminated if the function is not completed at the end of the timeout period. Defaults to 60 seconds."
   type        = number

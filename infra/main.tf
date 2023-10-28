@@ -34,6 +34,7 @@ resource "google_cloudfunctions2_function" "this" {
   service_config {
     max_instance_count    = var.max_instance_count
     timeout_seconds       = var.timeout_seconds
+    available_memory      = var.available_memory
     service_account_email = var.service_account_email
   }
 
