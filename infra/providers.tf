@@ -7,6 +7,6 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket = "terraform-state-bucket-gcp-practice-project-aman"
-    prefix = "cloud-function/process-gcs-excel-via-cloud-function"
+    prefix = "cloud-function/xlsx-to-bigquery-via-cloud-function"
   }
 }
