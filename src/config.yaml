@@ -1,3 +1,10 @@
+# Project Config
 PROJECT_ID: "gcp-practice-project-aman"
+REGION: "us-central1"
+
+# BigQuery Config
 BQ_DATASET: "raw_layer"
-BQ_TABLE: "test_table"
+BQ_TABLE: "xlxs_to_csv_pipeline"
+
+# Other Config
+JOB_SOURCE: "Cloud Function"

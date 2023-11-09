@@ -6,7 +6,7 @@ import pandas as pd
 
 from datetime import datetime
 from google.cloud import storage
-from helpers import clean_column_name
+from helpers import clean_column_name, find_table
 from io import BytesIO
 
 
@@ -37,21 +37,20 @@ def process_gcs_excel(cloudevent):
 
     # read excel file
     df = pd.read_excel(BytesIO(result), sheet_name=0)
+    new_df = find_table(df)
 
     # updating column names and converting to a dictionary
-    df.columns = [clean_column_name(col) for col in df.columns]
+    new_df.columns = [clean_column_name(col) for col in new_df.columns]
 
     # adding metadata columns
-    df["pipeline_source"] = "Cloud Function"
-    df["file_path"] = f"gs://{gcs_file_location}"
-    # Add a DATETIME column with the current timestamp
-    current_time = datetime.now()
-    df["load_datetime"] = current_time
-    df["load_date"] = current_time.date()
+    new_df["job_source"] = config_data["JOB_SOURCE"]
+    new_df["input_excel"] = f"gs://{gcs_file_location}"
+    new_df["output_csv"] = "N/A"
+    new_df["job_time"] = pd.Timestamp.now(tz="America/Toronto")
 
     # writing to BigQuery
     pandas_gbq.to_gbq(
-        df,
+        new_df,
         f"{config_data['BQ_DATASET']}.{config_data['BQ_TABLE']}",
         project_id=config_data["PROJECT_ID"],
         if_exists="append",
