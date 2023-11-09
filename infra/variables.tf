@@ -14,7 +14,7 @@ variable "gcp_region" {
 variable "name" {
   description = "A user-defined name of the function."
   type        = string
-  default     = "process-gcs-excel-via-cloud-function"
+  default     = "xlsx-to-bigquery-via-cloud-function"
 }
 
 variable "description" {
@@ -44,7 +44,7 @@ variable "max_instance_count" {
 variable "available_memory" {
   description = "(Optional) The amount of memory in MB available for a function. Defaults to 256MB."
   type        = string
-  default     = "512M"
+  default     = "1024M"
 }
 
 variable "timeout_seconds" {
@@ -61,7 +61,7 @@ variable "bucket_name" {
 
 variable "cf_trigger_bucket_path" {
   type    = string
-  default = "projects/_/buckets/cloud-function-bucket-gcp-practice-project-aman/objects/data/cloud-function-trigger/*.xlsx"
+  default = "projects/_/buckets/data-bucket-gcp-practice-project-aman/objects/data/raw-excel-cloud-function/*.xlsx"
 }
 
 variable "service_account_email" {
